@@ -9,7 +9,7 @@
 ### URL Format
 
 ```
-cashlez://cdcp?launcher=true&amount=1000&callback=app2://result?status=success&type=cdcp&data=%7B%22invoce%22%3A%20%22120202%7D
+cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 ```
 
 ---
@@ -42,7 +42,7 @@ Berikut adalah deskripsi parameter yang tersedia:
 URL untuk memulai pembayaran sejumlah Rp 10.00:
 
 ```
-cashlez://cdcp?launcher=true&amount=1000&callback=app2://result?status=success&type=cdcp&data=%7B%22invoce%22%3A%20%22120202%7D
+cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 ```
 
 #### **2. Callback dari Aplikasi Cashlez**
@@ -107,7 +107,7 @@ override fun onNewIntent(intent: Intent?) {
 
 ### **URL Format**
 ```
-cashlez://cdcp.void?invoice=0012726&callback=app2://result?status=success&type=cdcp&data=%7B%22invoce%22%3A%20%22120202%7D
+cashlez://cdcp.void?invoice=0012726&callback=app2://result
 ```
 
 ---
@@ -120,7 +120,7 @@ Berikut adalah deskripsi parameter yang tersedia:
 | `invoice`          | String          | Yes          | Nomor invoice transaksi yang akan dibatalkan.                                                           |
 | `callback`         | String (URL)    | Optional     | URL callback untuk menerima hasil pembatalan transaksi dari aplikasi Cashlez.                            |
 | `status` (Callback)| String          | Yes          | Status pembatalan transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`. |
-| `type` (Callback)  | String          | Yes          | Jenis transaksi (`cdcp`, `qris`).                                                            |
+| `type` (Callback)  | String          | Yes          | Jenis transaksi (`cdcp`, `qris`,`cdcp.void`).                                                            |
 | `data`             | JSON String     | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).      |
 
 ---
@@ -129,13 +129,13 @@ Berikut adalah deskripsi parameter yang tersedia:
 #### **1. Memulai Void Transaksi**
 URL untuk membatalkan transaksi dengan nomor invoice `0012726`:
 ```
-cashlez://cdcp.void?invoice=0012726&callback=app2://result?status=success&type=cdcp&data=%7B%22invoce%22%3A%20%22120202%7D
+cashlez://cdcp.void?invoice=0012726&callback=app2://result
 ```
 
 #### **2. Callback dari Aplikasi Cashlez**
 Jika pembatalan berhasil, aplikasi Cashlez akan mengirimkan callback ke URL berikut:
 ```
-app2://result?status=success&type=cdcp&data=%7B%22invoce%22%3A%20%22120202%7D
+app2://result?status=success&type=cdcp.void&data=%7B%22invoce%22%3A%20%22120202%7D
 ```
 
 ---
@@ -146,7 +146,7 @@ Aplikasi Anda harus menangani callback dengan parameter berikut:
 | Parameter   | Type        | Description                                                                 |
 |-------------|-------------|-----------------------------------------------------------------------------|
 | `status`    | String      | Status pembatalan transaksi (`success`, `failed`, `cancelled`).            |
-| `type`      | String      | Jenis transaksi yang dilakukan (`cdcp`).                                   |
+| `type`      | String      | Jenis transaksi yang dilakukan (`cdcp`, `cdcp.void`).                                   |
 | `data`      | JSON String | Informasi tambahan tentang transaksi dalam format JSON. Contoh: `{ "invoice": "120202" }`. |
 
 ---
@@ -163,7 +163,7 @@ override fun onNewIntent(intent: Intent?) {
         val type = uri.getQueryParameter("type")
         val data = uri.getQueryParameter("data")
 
-        if (status == "success" && type == "cdcp") {
+        if (status == "success" && type == "cdcp.void") {
             // Decode JSON data
             val decodedData = URLDecoder.decode(data, "UTF-8")
             val jsonObject = JSONObject(decodedData)
