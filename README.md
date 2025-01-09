@@ -117,7 +117,7 @@ Berikut adalah deskripsi parameter yang tersedia:
 
 | Parameter         | Type            | Required     | Description                                                                                              |
 |--------------------|-----------------|--------------|----------------------------------------------------------------------------------------------------------|
-| `invoice`          | String          | Yes          | Nomor invoice transaksi yang akan dibatalkan.                                                           |
+| `invoice`          | String          | Optional     | Nomor invoice transaksi yang akan dibatalkan.                                                           |
 | `callback`         | String (URL)    | Optional     | URL callback untuk menerima hasil pembatalan transaksi dari aplikasi Cashlez.                            |
 | `status` (Callback)| String          | Yes          | Status pembatalan transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`. |
 | `type` (Callback)  | String          | Yes          | Jenis transaksi (`cdcp`, `qris`,`cdcp.void`).                                                            |
