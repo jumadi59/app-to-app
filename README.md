@@ -45,6 +45,13 @@ URL untuk memulai pembayaran sejumlah Rp 10.00:
 cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 ```
 
+#### **Kotlin Example**
+```kotlin
+startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp?launcher=true&amount=1000&callback=app2://result")))
+// or
+startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp?launcher=true&amount=1000&callback=app2://result", 201)))
+```
+
 #### **2. Callback dari Aplikasi Cashlez**
 
 Jika pembayaran berhasil, aplikasi Cashlez akan mengirimkan callback ke URL berikut:
@@ -74,6 +81,8 @@ Berikut adalah contoh kode untuk menangani callback di aplikasi:
 #### **Kotlin Example**
 
 ```kotlin
+
+// from callback
 override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
     intent?.data?.let { uri ->
@@ -95,6 +104,34 @@ override fun onNewIntent(intent: Intent?) {
         }
     }
 }
+// from ActivityResult
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val string = StringBuilder()
+        string.append("requestCode=$requestCode\n")
+        string.append("resultCode=$resultCode\n")
+        string.append("status=${data?.getStringExtra("status")}\n")
+        string.append("type=${data?.getStringExtra("type")}\n")
+        string.append("data=${data?.getStringExtra("data")}\n")
+
+
+        data?.data?.let { uri ->
+            val status = uri.getQueryParameter("status")
+            val type = uri.getQueryParameter("type")
+            val data2 = uri.getQueryParameter("data")
+            string.append("status=$status\n")
+            string.append("type=$type\n")
+
+
+            if (!data2.isNullOrEmpty()) {
+                val decodedData = URLDecoder.decode(data2, "UTF-8")
+                string.append("data=$decodedData")
+            }
+        }
+
+        Log.e("TAG", "$requestCode $resultCode ${data?.extras?.keySet()?.joinToString()}")
+        Log.e("TAG", string.toString())
+    }
 ```
 
 
@@ -132,6 +169,13 @@ URL untuk membatalkan transaksi dengan nomor invoice `0012726`:
 cashlez://cdcp.void?invoice=0012726&callback=app2://result
 ```
 
+#### **Kotlin Example**
+```kotlin
+startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp.void?invoice=0012726&callback=app2://result")))
+// or
+startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp.void?invoice=0012726&callback=app2://result", 201)))
+```
+
 #### **2. Callback dari Aplikasi Cashlez**
 Jika pembatalan berhasil, aplikasi Cashlez akan mengirimkan callback ke URL berikut:
 ```
@@ -156,6 +200,8 @@ Berikut adalah contoh kode untuk menangani callback di aplikasi:
 
 #### **Kotlin Example**
 ```kotlin
+
+// from callback
 override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
     intent?.data?.let { uri ->
@@ -177,5 +223,34 @@ override fun onNewIntent(intent: Intent?) {
         }
     }
 }
+
+// from ActivityResult
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val string = StringBuilder()
+        string.append("requestCode=$requestCode\n")
+        string.append("resultCode=$resultCode\n")
+        string.append("status=${data?.getStringExtra("status")}\n")
+        string.append("type=${data?.getStringExtra("type")}\n")
+        string.append("data=${data?.getStringExtra("data")}\n")
+
+
+        data?.data?.let { uri ->
+            val status = uri.getQueryParameter("status")
+            val type = uri.getQueryParameter("type")
+            val data2 = uri.getQueryParameter("data")
+            string.append("status=$status\n")
+            string.append("type=$type\n")
+
+
+            if (!data2.isNullOrEmpty()) {
+                val decodedData = URLDecoder.decode(data2, "UTF-8")
+                string.append("data=$decodedData")
+            }
+        }
+
+        Log.e("TAG", "$requestCode $resultCode ${data?.extras?.keySet()?.joinToString()}")
+        Log.e("TAG", string.toString())
+    }
 ```
 
