@@ -9,7 +9,7 @@
 ### URL Format
 
 ```
-cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
+cashlez://cdcp?launcher=true&amount=1000&print_receipt=true&callback=app2://result
 ```
 
 ---
@@ -20,8 +20,9 @@ Berikut adalah deskripsi parameter yang tersedia:
 
 | **Parameter**       | **Type**     | **Required** | **Description**                                                                                         |
 | ------------------- | ------------ | ------------ | --------------------------------------------------------------------------------------------------------|
-| `launcher`          | Boolean      | Yes          | Menentukan apakah aplikasi Cashlez akan diluncurkan. Nilai harus `true`.                                |
+| `launcher`          | Boolean      | Yes          | Menentukan apakah aplikasi anda sebagai launcher saja.                                                  |
 | `amount`            | Integer      | Optional     | Jumlah pembayaran dalam satuan terkecil mata uang (contoh: 1000 untuk Rp 10.00).                        |
+| `print_receipt`     | Boolean      | Optional     | Menentukan apakah receipt Cashlez akan auto print.                                                      |
 | `callback`          | String (URL) | Optional     | URL callback untuk menerima hasil transaksi dari aplikasi Cashlez.                                      |
 | `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
 | `type` (Callback)   | String       | Yes          | Jenis transaksi (`cdcp`, `qris`, `prepaid`).                                                            |
@@ -43,7 +44,7 @@ cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 ```kotlin
 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp?launcher=true&amount=1000&callback=app2://result")))
 // or
-startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp?launcher=true&amount=1000&callback=app2://result", 201)))
+startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp?launcher=true&amount=1000", 201)))
 ```
 
 #### **2. Callback dari Aplikasi Cashlez**
@@ -137,13 +138,14 @@ cashlez://cdcp.void?invoice=0012726&callback=app2://result
 ### **Parameters**
 Berikut adalah deskripsi parameter yang tersedia:
 
-| Parameter         | Type            | Required     | Description                                                                                              |
-|--------------------|-----------------|--------------|----------------------------------------------------------------------------------------------------------|
-| `invoice`          | String          | Optional     | Nomor invoice transaksi yang akan dibatalkan.                                                           |
-| `callback`         | String (URL)    | Optional     | URL callback untuk menerima hasil pembatalan transaksi dari aplikasi Cashlez.                            |
+| Parameter         | Type            | Required     | Description                                                                                                      |
+|--------------------|-----------------|--------------|-----------------------------------------------------------------------------------------------------------------|
+| `invoice`          | String          | Optional     | Nomor invoice transaksi yang akan dibatalkan.                                                                   |
+| `print_receipt`    | Boolean         | Optional     | Menentukan apakah receipt Cashlez akan auto print.                                                              |
+| `callback`         | String (URL)    | Optional     | URL callback untuk menerima hasil pembatalan transaksi dari aplikasi Cashlez.                                   |
 | `status` (Callback)| String          | Yes          | Status pembatalan transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`. |
-| `type` (Callback)  | String          | Yes          | Jenis transaksi (`cdcp`, `qris`,`cdcp.void`).                                                            |
-| `data`             | JSON String     | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).      |
+| `type` (Callback)  | String          | Yes          | Jenis transaksi (`cdcp`, `qris`,`cdcp.void`).                                                                   |
+| `data`             | JSON String     | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).             |
 
 ---
 
@@ -158,7 +160,7 @@ cashlez://cdcp.void?invoice=0012726&callback=app2://result
 ```kotlin
 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp.void?invoice=0012726&callback=app2://result")))
 // or
-startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp.void?invoice=0012726&callback=app2://result", 201)))
+startActivityForResult(Intent(Intent.ACTION_VIEW, Uri.parse("cashlez://cdcp.void?invoice=0012726", 201)))
 ```
 
 #### **2. Callback dari Aplikasi Cashlez**
@@ -172,10 +174,10 @@ app2://result?status=success&type=cdcp.void&data=%7B%22invoce%22%3A%20%22120202%
 ### **Callback Parameters**
 Aplikasi Anda harus menangani callback dengan parameter berikut:
 
-| Parameter   | Type        | Description                                                                 |
-|-------------|-------------|-----------------------------------------------------------------------------|
-| `status`    | String      | Status pembatalan transaksi (`success`, `failed`, `cancelled`).            |
-| `type`      | String      | Jenis transaksi yang dilakukan (`cdcp`, `cdcp.void`).                                   |
+| Parameter   | Type        | Description                                                                                |
+|-------------|-------------|--------------------------------------------------------------------------------------------|
+| `status`    | String      | Status pembatalan transaksi (`success`, `failed`, `cancelled`).                            |
+| `type`      | String      | Jenis transaksi yang dilakukan (`cdcp`, `cdcp.void`).                                      |
 | `data`      | JSON String | Informasi tambahan tentang transaksi dalam format JSON. Contoh: `{ "invoice": "120202" }`. |
 
 ---
