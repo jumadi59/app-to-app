@@ -1,4 +1,4 @@
-## Cashlez Trancaction URL Scheme Documentation
+## Cashlez Transaction URL Scheme Documentation
 
 ### Overview
 
