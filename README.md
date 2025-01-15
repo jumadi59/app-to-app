@@ -18,12 +18,6 @@ cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 
 Berikut adalah deskripsi parameter yang tersedia:
 
-|   |
-| - |
-
-|   |
-| - |
-
 | **Parameter**       | **Type**     | **Required** | **Description**                                                                                     |
 | ------------------- | ------------ | ------------ | --------------------------------------------------------------------------------------------------- |
 | `launcher`          | Boolean      | Yes          | Menentukan apakah aplikasi Cashlez akan diluncurkan. Nilai harus `true`.                            |
