@@ -18,14 +18,14 @@ cashlez://cdcp?launcher=true&amount=1000&callback=app2://result
 
 Berikut adalah deskripsi parameter yang tersedia:
 
-| **Parameter**       | **Type**     | **Required** | **Description**                                                                                     |
-| ------------------- | ------------ | ------------ | --------------------------------------------------------------------------------------------------- |
-| `launcher`          | Boolean      | Yes          | Menentukan apakah aplikasi Cashlez akan diluncurkan. Nilai harus `true`.                            |
-| `amount`            | Integer      | Optional     | Jumlah pembayaran dalam satuan terkecil mata uang (contoh: 1000 untuk Rp 10.00).                    |
-| `callback`          | String (URL) | Optional     | URL callback untuk menerima hasil transaksi dari aplikasi Cashlez.                                  |
+| **Parameter**       | **Type**     | **Required** | **Description**                                                                                         |
+| ------------------- | ------------ | ------------ | --------------------------------------------------------------------------------------------------------|
+| `launcher`          | Boolean      | Yes          | Menentukan apakah aplikasi Cashlez akan diluncurkan. Nilai harus `true`.                                |
+| `amount`            | Integer      | Optional     | Jumlah pembayaran dalam satuan terkecil mata uang (contoh: 1000 untuk Rp 10.00).                        |
+| `callback`          | String (URL) | Optional     | URL callback untuk menerima hasil transaksi dari aplikasi Cashlez.                                      |
 | `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
-| `type` (Callback)   | String       | Yes          | Jenis transaksi (`cdcp`, `qris`).                                                       |
-| `data`              | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`). |
+| `type` (Callback)   | String       | Yes          | Jenis transaksi (`cdcp`, `qris`, `prepaid`).                                                            |
+| `data`              | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).     |
 
 ---
 
