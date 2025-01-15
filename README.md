@@ -94,7 +94,7 @@ override fun onNewIntent(intent: Intent?) {
             // Decode JSON data
             val decodedData = URLDecoder.decode(data, "UTF-8")
             val jsonObject = JSONObject(decodedData)
-            val invoice = jsonObject.optString("invoice")
+            val invoice = jsonObject.optString("invoice_num")
 
             // Handle success
             Toast.makeText(this, "Payment successful for invoice: $invoice", Toast.LENGTH_LONG).show()
@@ -107,30 +107,21 @@ override fun onNewIntent(intent: Intent?) {
 // from ActivityResult
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val string = StringBuilder()
-        string.append("requestCode=$requestCode\n")
-        string.append("resultCode=$resultCode\n")
-        string.append("status=${data?.getStringExtra("status")}\n")
-        string.append("type=${data?.getStringExtra("type")}\n")
-        string.append("data=${data?.getStringExtra("data")}\n")
+        
+        val status = data?.getStringExtra("status")
+        val type = data?.getStringExtra("type")
+        val data = data?.getStringExtra("data")
 
+        if (status == "success" && type == "cdcp") {
+            val jsonObject = JSONObject(data)
+            val invoice = jsonObject.optString("invoice_num")
 
-        data?.data?.let { uri ->
-            val status = uri.getQueryParameter("status")
-            val type = uri.getQueryParameter("type")
-            val data2 = uri.getQueryParameter("data")
-            string.append("status=$status\n")
-            string.append("type=$type\n")
-
-
-            if (!data2.isNullOrEmpty()) {
-                val decodedData = URLDecoder.decode(data2, "UTF-8")
-                string.append("data=$decodedData")
-            }
+            // Handle success
+            Toast.makeText(this, "Payment successful for invoice: $invoice", Toast.LENGTH_LONG).show()
+        } else {
+            // Handle other statuses
+            Toast.makeText(this, "Transaction failed or cancelled", Toast.LENGTH_LONG).show()
         }
-
-        Log.e("TAG", "$requestCode $resultCode ${data?.extras?.keySet()?.joinToString()}")
-        Log.e("TAG", string.toString())
     }
 ```
 
@@ -227,30 +218,20 @@ override fun onNewIntent(intent: Intent?) {
 // from ActivityResult
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val string = StringBuilder()
-        string.append("requestCode=$requestCode\n")
-        string.append("resultCode=$resultCode\n")
-        string.append("status=${data?.getStringExtra("status")}\n")
-        string.append("type=${data?.getStringExtra("type")}\n")
-        string.append("data=${data?.getStringExtra("data")}\n")
+        val status = data?.getStringExtra("status")
+        val type = data?.getStringExtra("type")
+        val data = data?.getStringExtra("data")
 
+        if (status == "success" && type == "cdcp") {
+            val jsonObject = JSONObject(data)
+            val invoice = jsonObject.optString("invoice_num")
 
-        data?.data?.let { uri ->
-            val status = uri.getQueryParameter("status")
-            val type = uri.getQueryParameter("type")
-            val data2 = uri.getQueryParameter("data")
-            string.append("status=$status\n")
-            string.append("type=$type\n")
-
-
-            if (!data2.isNullOrEmpty()) {
-                val decodedData = URLDecoder.decode(data2, "UTF-8")
-                string.append("data=$decodedData")
-            }
+            // Handle success
+            Toast.makeText(this, "Payment successful for invoice: $invoice", Toast.LENGTH_LONG).show()
+        } else {
+            // Handle other statuses
+            Toast.makeText(this, "Transaction failed or cancelled", Toast.LENGTH_LONG).show()
         }
-
-        Log.e("TAG", "$requestCode $resultCode ${data?.extras?.keySet()?.joinToString()}")
-        Log.e("TAG", string.toString())
     }
 ```
 
