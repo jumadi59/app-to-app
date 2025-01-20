@@ -31,6 +31,9 @@ cashlez://miniatm.checkbalance?launcher=true&saving_type=3000&print_receipt=true
 | `saving_type`       | String          | Optional     | Jenis tabungan yang akan dicek (saving: `1000`,current:`2000`).                  |
 | `print_receipt`     | Boolean         | Optional     | Menentukan apakah struk akan dicetak. Nilai `true` untuk mencetak.               |
 | `callback`          | String (URL)    | Optional     | URL callback untuk menerima hasil dari transaksi cek saldo.                      |
+| `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
+| `type` (Callback)   | String       | Yes          | Jenis transaksi (`miniatm.checkbalance`).                                                            |
+| `data` (Callback)              | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).     |
 
 ---
 
@@ -38,7 +41,7 @@ cashlez://miniatm.checkbalance?launcher=true&saving_type=3000&print_receipt=true
 
 **URL Format**:
 ```
-cashlez://miniatm.transfer?launcher=true&amount=1000&saving_type=3000&dest_bank_code=014&dest_bank_account=123456789000&print_receipt=true&callback=app2://result?type=miniatm.transfer
+cashlez://miniatm.transfer?launcher=true&amount=1000&saving_type=3000&dest_bank_code=014&dest_bank_account=123456789000&print_receipt=true&callback=app2://result
 ```
 
 **Parameters**:
@@ -51,6 +54,9 @@ cashlez://miniatm.transfer?launcher=true&amount=1000&saving_type=3000&dest_bank_
 | `dest_bank_account` | String          | Optional     | Nomor rekening tujuan transfer.                                                    |
 | `print_receipt`     | Boolean         | Optional     | Menentukan apakah struk akan dicetak. Nilai `true` untuk mencetak.                 |
 | `callback`          | String (URL)    | Optional     | URL callback untuk menerima hasil dari transaksi transfer.                         |
+| `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
+| `type` (Callback)   | String       | Yes          | Jenis transaksi (`miniatm.checkbalance`).                                                            |
+| `data` (Callback)              | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).     |
 
 ---
 
@@ -58,7 +64,7 @@ cashlez://miniatm.transfer?launcher=true&amount=1000&saving_type=3000&dest_bank_
 
 **URL Format**:
 ```
-cashlez://miniatm.cashwithdrawal?launcher=true&amount=1000&saving_type=3000&print_receipt=true&callback=app2://result?type=miniatm.cashwithdrawal
+cashlez://miniatm.cashwithdrawal?launcher=true&amount=1000&saving_type=3000&print_receipt=true&callback=app2://result
 ```
 
 **Parameters**:
@@ -69,6 +75,9 @@ cashlez://miniatm.cashwithdrawal?launcher=true&amount=1000&saving_type=3000&prin
 | `saving_type`       | String          | Optional     | Jenis tabungan yang digunakan untuk tarik tunai.                                 |
 | `print_receipt`     | Boolean         | Optional     | Menentukan apakah struk akan dicetak. Nilai `true` untuk mencetak.               |
 | `callback`          | String (URL)    | Optional     | URL callback untuk menerima hasil dari transaksi tarik tunai.                    |
+| `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
+| `type` (Callback)   | String       | Yes          | Jenis transaksi (`miniatm.cashwithdrawal`).                                                            |
+| `data` (Callback)             | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).     |
 
 ---
 
@@ -76,7 +85,7 @@ cashlez://miniatm.cashwithdrawal?launcher=true&amount=1000&saving_type=3000&prin
 
 **URL Format**:
 ```
-cashlez://miniatm.cashdeposit?launcher=true&amount=1000&saving_type=3000&print_receipt=true&callback=app2://result?type=miniatm.cashdeposit
+cashlez://miniatm.cashdeposit?launcher=true&amount=1000&saving_type=3000&print_receipt=true&callback=app2://result
 ```
 
 **Parameters**:
@@ -87,6 +96,9 @@ cashlez://miniatm.cashdeposit?launcher=true&amount=1000&saving_type=3000&print_r
 | `saving_type`       | String          | Optional     | Jenis tabungan yang digunakan untuk setor tunai.                                 |
 | `print_receipt`     | Boolean         | Optional     | Menentukan apakah struk akan dicetak. Nilai `true` untuk mencetak.               |
 | `callback`          | String (URL)    | Optional     | URL callback untuk menerima hasil dari transaksi setor tunai.                    |
+| `status` (Callback) | String       | Yes          | Status transaksi (`success`, `failed`, `cancelled`, `error`.). Ini merupakan bagian dari `callback`.    |
+| `type` (Callback)   | String       | Yes          | Jenis transaksi (`miniatm.cashdeposit`).                                                            |
+| `data` (Callback)             | JSON String  | Optional     | Informasi tambahan dalam format JSON yang dienkode sebagai URL (contoh: `{ "invoice": "120202" }`).     |
 
 ---
 
