@@ -280,3 +280,35 @@ override fun onNewIntent(intent: Intent?) {
     }
 ```
 
+#### callback data json
+
+##### success
+```json
+{
+    "response_code": "0031",
+    "is_debit_flag": false,
+    "card_expiry_date": "2612",
+    "card_holder_name": "JUMADI JANJAYA/          ",
+    "batch_group": "BNI_CREDIT",
+    "trx_host_date": "0724",
+    "mid": "111101234012100",
+    "void_host_date": "0724",
+    "tid": "20000120",
+    "trx_host_time": "232540",
+    "invoice_num": "000252",
+    "base_amount": 1000,
+    "approval_code": "948014",
+    "void_host_time": "232907",
+    "midware_timestamp": "1690216147",
+    "message": "VOID APPROVED.",
+    "batch_num": "000010",
+    "rrn": "000000000149",
+    "masked_pan": "488950******1913",
+    "print_receipt_merchant_name": "Toko Dinda",
+    "bin_result": "VISA_BIN1",
+    "print_receipt_address_line_2": "Bali",
+    "print_receipt_address_line_1": "Jalan Pemuda No.11",
+    "status": "OK"
+}
+```
+
