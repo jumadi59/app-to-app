@@ -120,6 +120,55 @@ override fun onNewIntent(intent: Intent?) {
     }
 ```
 
+#### callback data json
+
+##### success
+```json
+{
+    "response_code": "0020",
+    "is_debit_flag": false,
+    "card_expiry_date": "2612",
+    "card_holder_name": "JUMADI JANJAYA/          ",
+    "batch_group": "BNI_CREDIT",
+    "mid": "111101234012100",
+    "tid": "20000120",
+    "host_date": "0724",
+    "pos_request_type": "1",
+    "invoice_num": "000251",
+    "base_amount": 10000,
+    "approval_code": "288163",
+    "midware_timestamp": "1690215056",
+    "message": "SALE APPROVED.",
+    "batch_num": "000009",
+    "rrn": "000000000148",
+    "masked_pan": "488950******1913",
+    "print_receipt_merchant_name": "Toko Dinda",
+    "bin_result": "VISA_BIN1",
+    "host_time": "231056",
+    "print_receipt_address_line_2": "Bali",
+    "print_receipt_address_line_1": "Jalan Pemuda No.11",
+    "status": "OK"
+}
+```
+##### not approved
+```json
+{
+  "response_code": "0P00",
+  "is_debit_flag": true,
+  "batch_group": "MTI",
+  "midware_timestamp": "1737516071",
+  "mid": "000071698997563",
+  "bank_response_code_definition": "not define yet.",
+  "message": "CDCP - SALE - FAILED.\nRESPONSE CODE FROM BANK NOT APPROVED.",
+  "tid": "80623101",
+  "acquirer_name": "MANDIRI - MTI",
+  "masked_pan": "510481******8700",
+  "bank_response_code": "C4",
+  "trx_channel": "MTI_TRX_CHN_1",
+  "trace_num": "010287",
+  "status": "ERROR"
+}
+```
 
 ## Cashlez Void URL Scheme Documentation
 
